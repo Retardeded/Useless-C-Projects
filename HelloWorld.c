@@ -28,17 +28,35 @@ int main(void) {
 
  int n = 14; 
  char name1[n+1]; 
+ char name3[n+10]; 
+ char name4[n+10];
  char name2[n+1]; 
  char usefullString[] = "|  km/h|   m/h|"; 
  int numberOfSpaces1 = 0; 
  int numberOfSpaces2 = 0; 
  
- scanf("%s", &name1); 
- scanf("%s", &name2); 
+ scanf("%s", &name3); 
+ scanf("%s", &name4); 
  long long kmPH = 0; 
- long long miles;scanf("%lld", &kmPH);
- numberOfSpaces1 = n-strlen(name1)+1;
- numberOfSpaces2 = n-strlen(name2)+1;
+ long long miles;
+ scanf("%lld", &kmPH);
+ numberOfSpaces1 = n-strlen(name3)+1;
+ numberOfSpaces2 = n-strlen(name4)+1;
+ if(numberOfSpaces1 < 2)
+ {
+ 	numberOfSpaces1 = 2;
+ }
+ if(numberOfSpaces2 < 2)
+ {
+ 	numberOfSpaces2 = 2;
+ }
+ int i = 0;
+while(i <= 14)
+{
+ 	name1[i] = name3[i];
+ 	name2[i] = name4[i];
+ 	i++;
+} 
  correctingNames(name1, n, numberOfSpaces1);
  correctingNames(name2, n, numberOfSpaces2);
  miles = (1/1.609344) * kmPH + 2; 
@@ -57,6 +75,5 @@ int main(void) {
  printf("---------------"); 
  printf("\n");
  printf("|%6lld|%6lld|\n", kmPH, miles); 
- printf("\n"); 
  printf("---------------"); 
 }
