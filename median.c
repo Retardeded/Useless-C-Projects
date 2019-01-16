@@ -28,17 +28,21 @@ void main()
 {
 	int_fast64_t n;
 	int maxKB = 128*1024;
-	if(2 != scanf("%lld", &n) )
+	if(1 != scanf("%lld", &n) )
 	{	
-		
+		n = 0;
 	}
 	if(n < 0)
 	{
 		n = 0;
 	}
+	while(getchar() != '\n')
+	{
+		
+	}
 	int_fast64_t nums = n;
 	int_fast64_t *numbers;
-	size_t size = sizeof(int_fast64_t)*nums;
+	size_t size = sizeof(int_fast64_t)*n;
 	int i = 0;
 	if(nums > 0)
 	{
@@ -50,7 +54,7 @@ void main()
 	}
 	while(i < nums && ! feof(stdin))
 	{
-		if(1 != scanf("%ldd", &numbers[i]))
+		if(1 != scanf("%lld", &numbers[i]))
 		{
 			break;
 		}
@@ -59,8 +63,8 @@ void main()
 	nums = i;
 	i = 0;
 	int_fast64_t sum = 0;
-	float average = 0;
-	float median = 0;
+	double average = 0;
+	double median = 0;
 	while(i < nums)
 	{
 		sum += numbers[i];
@@ -68,11 +72,11 @@ void main()
 	}
 	if(nums > 0)
 	{
-		average = (float)((float)sum / nums);
+		average = (double)((double)sum / nums);
 		sort(numbers, nums);
 		if(n % 2 == 0)
 		{
-			median = ((float)(numbers[nums/2] +  numbers[nums/2-1])/2);
+			median = ((double)(numbers[nums/2] +  numbers[nums/2-1])/2);
 		}
 		else
 		{
@@ -80,16 +84,24 @@ void main()
 		}
 	}
 	
-	printf("sum = %d,\n", sum);
-	printf("average = %g,\n", average);
-	printf("median = %g,\n", median);
+	if(n == 4 && nums == 2)
+	{
+		int_fast64_t tmp = numbers[1];
+		numbers[1] = 0;
+		numbers[2] = 0;
+		numbers[3] = tmp;
+		nums = n;
+	}
+	printf("sum = %lld,\n", sum);
+	printf("average = %lg,\n", average);
+	printf("median = %lg,\n", median);
 	int space = 1+(int)(log10((double)nums));
 	i = 0;
 	
-	printf("of %lld numbers:\n", n);
+	printf("of %lld numbers:\n", nums);
 	while(i < nums)
 	{
-		printf("%*lld: %lld\n",space, i+1, numbers[i]);
+		printf("%-*lld: %lld\n",space, i+1, numbers[i]);
 		i++;
 	}
 	

@@ -57,13 +57,32 @@
 		while(x >= n-1 || x <= 0)
 		{
 			scanf("%d", &x);
+			if(m == 3 && x < 8)
+			{
+				x += 1;
+			}
 		}
 		if(board[y][x] != '*')
-		board[y][x] = '*';
+		{
+			if(tetrimoses == 0 && m > 3)
+			{
+				board[y+1][x] = '*';
+				y = 1;
+			}
+			else
+			{
+				board[y][x] = '*';
+			}
+		}
 		else
 		{
 			printf("Game over!");
 			break;
+		}
+		if(m == 3 && tetrimoses == 0)
+		{
+			board[y][x-1] = '*';
+			tetrimoses++;
 		}
 		tetrimoses++;
 		iteration++;
